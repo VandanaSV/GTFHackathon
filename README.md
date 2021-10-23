@@ -14,3 +14,7 @@ How to run
 --------------
 Run the Script.sh file from terminal as follows: ./Script.sh
 
+Output
+--------
+Check the code-coverage-report folder to see the code coverage report generated
+
