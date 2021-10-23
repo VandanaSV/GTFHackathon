@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.business.service</a> &gt; <span class="el_source">ReservationService.java</span></div><h1>ReservationService.java</h1><pre class="source lang-java linenums">package com.example.demo.business.service;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.example.demo.business.domain.RoomReservation;
+import com.example.demo.data.entity.Guest;
+import com.example.demo.data.entity.Reservation;
+import com.example.demo.data.entity.Room;
+import com.example.demo.data.repository.GuestRepository;
+import com.example.demo.data.repository.ReservationRepository;
+import com.example.demo.data.repository.RoomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ReservationService {
+    private final RoomRepository roomRepository;
+    private final GuestRepository guestRepository;
+    private final ReservationRepository reservationRepository;
+
+    @Autowired
+<span class="fc" id="L27">    public ReservationService(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepository reservationRepository) {</span>
+<span class="fc" id="L28">        this.roomRepository = roomRepository;</span>
+<span class="fc" id="L29">        this.guestRepository = guestRepository;</span>
+<span class="fc" id="L30">        this.reservationRepository = reservationRepository;</span>
+<span class="fc" id="L31">    }</span>
+
+    public List&lt;RoomReservation&gt; getRoomReservationsForDate(Date date){
+<span class="fc" id="L34">        Iterable&lt;Room&gt; rooms = this.roomRepository.findAll();</span>
+<span class="fc" id="L35">        Map&lt;Long, RoomReservation&gt; roomReservationMap = new HashMap();</span>
+<span class="fc" id="L36">        rooms.forEach(room -&gt; {</span>
+<span class="fc" id="L37">            RoomReservation roomReservation = new RoomReservation();</span>
+<span class="fc" id="L38">            roomReservation.setRoomId(room.getRoomId());</span>
+<span class="fc" id="L39">            roomReservation.setRoomName(room.getRoomName());</span>
+<span class="fc" id="L40">            roomReservation.setRoomNumber(room.getRoomNumber());</span>
+<span class="fc" id="L41">            roomReservationMap.put(room.getRoomId(), roomReservation);</span>
+<span class="fc" id="L42">        });</span>
+<span class="fc" id="L43">        Iterable&lt;Reservation&gt; reservations = this.reservationRepository.findReservationByReservationDate(new java.sql.Date(date.getTime()));</span>
+<span class="fc" id="L44">        reservations.forEach(reservation -&gt; {</span>
+<span class="nc" id="L45">            RoomReservation roomReservation = roomReservationMap.get(reservation.getRoomId());</span>
+<span class="nc" id="L46">            roomReservation.setDate(date);</span>
+<span class="nc" id="L47">            Guest guest = this.guestRepository.findById(reservation.getGuestId()).get();</span>
+<span class="nc" id="L48">            roomReservation.setFirstName(guest.getFirstName());</span>
+<span class="nc" id="L49">            roomReservation.setLastName(guest.getLastName());</span>
+<span class="nc" id="L50">            roomReservation.setGuestId(guest.getGuestId());</span>
+<span class="nc" id="L51">        });</span>
+<span class="fc" id="L52">        List&lt;RoomReservation&gt; roomReservations = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for(Long id: roomReservationMap.keySet()){</span>
+<span class="fc" id="L54">            roomReservations.add(roomReservationMap.get(id));</span>
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">        roomReservations.sort(new Comparator&lt;RoomReservation&gt;() {</span>
+            @Override
+            public int compare(RoomReservation o1, RoomReservation o2) {
+<span class="fc bfc" id="L59" title="All 2 branches covered.">                if (o1.getRoomName() == o2.getRoomName()){</span>
+<span class="fc" id="L60">                    return o1.getRoomNumber().compareTo(o2.getRoomNumber());</span>
+                }
+<span class="fc" id="L62">                return o1.getRoomName().compareTo(o2.getRoomName());</span>
+            }
+        });
+<span class="fc" id="L65">        return roomReservations;</span>
+    }
+    public List&lt;Guest&gt; getHotelGuests(){
+<span class="fc" id="L68">        Iterable&lt;Guest&gt; guests = this.guestRepository.findAll();</span>
+<span class="fc" id="L69">        List&lt;Guest&gt; guestList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L70">        guests.forEach(guest-&gt;{guestList.add(guest);});</span>
+<span class="fc" id="L71">        guestList.sort(new Comparator&lt;Guest&gt;() {</span>
+            @Override
+            public int compare(Guest o1, Guest o2) {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">                if (o1.getLastName() == o2.getLastName()){</span>
+<span class="fc" id="L75">                    return o1.getFirstName().compareTo(o2.getFirstName());</span>
+                }
+<span class="fc" id="L77">                return o1.getLastName().compareTo(o2.getLastName());</span>
+            }
+        });
+<span class="fc" id="L80">        return guestList;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

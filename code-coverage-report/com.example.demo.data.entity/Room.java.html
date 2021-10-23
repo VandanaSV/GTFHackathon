@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Room.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.data.entity</a> &gt; <span class="el_source">Room.java</span></div><h1>Room.java</h1><pre class="source lang-java linenums">package com.example.demo.data.entity;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=&quot;ROOM&quot;)
+<span class="fc" id="L8">public class Room {</span>
+	@Id
+	@Column(name=&quot;ROOM_ID&quot;)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long roomId;
+	
+	@Column(name=&quot;NAME&quot;)
+	private String roomName;
+	
+	@Column(name=&quot;ROOM_NUMBER&quot;)
+	private String roomNumber;
+	
+	@Column(name=&quot;BED_INFO&quot;)
+	private String bedInfo;
+
+	public long getRoomId() {
+<span class="fc" id="L24">		return roomId;</span>
+	}
+
+	public void setRoomId(long roomId) {
+<span class="nc" id="L28">		this.roomId = roomId;</span>
+<span class="nc" id="L29">	}</span>
+
+	public String getRoomName() {
+<span class="fc" id="L32">		return roomName;</span>
+	}
+
+	public void setRoomName(String roomName) {
+<span class="nc" id="L36">		this.roomName = roomName;</span>
+<span class="nc" id="L37">	}</span>
+
+	public String getRoomNumber() {
+<span class="fc" id="L40">		return roomNumber;</span>
+	}
+
+	public void setRoomNumber(String roomNumber) {
+<span class="nc" id="L44">		this.roomNumber = roomNumber;</span>
+<span class="nc" id="L45">	}</span>
+
+	public String getBedInfo() {
+<span class="nc" id="L48">		return bedInfo;</span>
+	}
+
+	public void setBedInfo(String bedInfo) {
+<span class="nc" id="L52">		this.bedInfo = bedInfo;</span>
+<span class="nc" id="L53">	}</span>
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
