@@ -26,7 +26,7 @@ echo "######### Application class files are derived from jar file for coverage r
 echo "-------------------------------------------------------------------------------------------------------"
 mkdir Application
 cp libraries/application-jar/* Application
-cd Application
+cd libraries/application-jar
 jar xf SampleApp-1.0.0-spring-boot.jar 
 jar xf SampleApp-1.0.0-sources.jar
 classfiles='Application/BOOT-INF/classes/com'
@@ -42,6 +42,7 @@ echo "--------------------------------------------------------------------------
 echo "######### Cleanup:Removing all the application class files ##########"
 echo "-------------------------------------------------------------------------------------------------------"
 rm -r Application
+rm -r application-jar/*
 echo "-------------------------------------------------------------------------------------------------------"
 echo "######### Uploading code coverage report to Jira story ##########"
 echo "-------------------------------------------------------------------------------------------------------"
@@ -54,10 +55,6 @@ curl 	-X POST \
 	-H "Authorization:Basic $Accesstoken" \
 	-F "file=@code-coverage-report/code-coverage-report.html" \
 	https://hackathon-poc.atlassian.net/rest/api/3/issue/$JiraId/attachments
-
-
-
-	
 
 
 
