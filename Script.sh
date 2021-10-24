@@ -42,7 +42,7 @@ echo "--------------------------------------------------------------------------
 echo "######### Cleanup:Removing all the application class files ##########"
 echo "-------------------------------------------------------------------------------------------------------"
 rm -r Application
-
+rm -r libraries/application-jar/*
 echo "-------------------------------------------------------------------------------------------------------"
 echo "######### Uploading code coverage report to Jira story ##########"
 echo "-------------------------------------------------------------------------------------------------------"
@@ -54,12 +54,11 @@ Accesstoken='dmFuZGFuYXN2b25AZ21haWwuY29tOlFvczMwWkdHd2psc05YS2pFQXg2NTgzQw=='
 curl 	-X POST \
 	-H "X-Atlassian-Token:no-check" \
 	-H "Authorization:Basic $Accesstoken" \
-	-F "file=@code-coverage-report/code-coverage-report.zip" \
+	-F "file=@code-coverage-report.zip" \
 	https://hackathon-poc.atlassian.net/rest/api/3/issue/$JiraId/attachments
 
 
-
-
+rm -r code-coverage-report.zip
 
 
 

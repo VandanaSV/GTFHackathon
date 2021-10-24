@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import static org.junit.Assert.assertEquals;
 
 public class SimpleTest  {
-    WebDriver driver = new FirefoxDriver();
+    WebDriver driver = new ChromeDriver();
     /**
      * Simple Test case annotating JUnit Test
      * @throws Exception
