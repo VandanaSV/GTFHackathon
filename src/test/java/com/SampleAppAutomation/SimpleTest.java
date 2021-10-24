@@ -4,20 +4,25 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 
 
 import static org.junit.Assert.assertEquals;
 
 public class SimpleTest  {
-    WebDriver driver = new FirefoxDriver();
+
+
     /**
      * Simple Test case annotating JUnit Test
      * @throws Exception
      */
     @Test
-    public void test() throws Exception {
 
+    public void test() throws Exception {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+            WebDriver driver= new ChromeDriver(options);
             driver.get("http://localhost:8080/");
             Thread.sleep(5000);
             assertEquals("Hotel Pink Flamingos", driver.getTitle());
