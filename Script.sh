@@ -60,6 +60,7 @@ curl 	-X POST \
 
 rm -r code-coverage-report.zip
 
+kill $(lsof -t -i:8080)
 
 
 
