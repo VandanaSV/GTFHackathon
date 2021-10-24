@@ -2,8 +2,6 @@
 echo "################ CODE COVERAGE TOOL ###############################"
 
 echo "######### Cleanup:Removing all execution files from previous run ##########"
-rm -r exec/*
-rm -r code-coverage-report/*
 
 sleep 5
 echo "-------------------------------------------------------------------------------------------------------"
@@ -38,11 +36,7 @@ echo "######### Jacoco cli converts the exec to html format analyzing the applic
 echo "-------------------------------------------------------------------------------------------------------"
 cd ..
 java -jar libraries/jacococli.jar report exec/jacoco-it.exec --classfiles $classfiles --sourcefiles $sourcefiles/java --html code-coverage-report/
-echo "-------------------------------------------------------------------------------------------------------"
-echo "######### Cleanup:Removing all the application class files ##########"
-echo "-------------------------------------------------------------------------------------------------------"
-rm -r Application
-rm -r libraries/application-jar/*
+
 echo "-------------------------------------------------------------------------------------------------------"
 echo "######### Uploading code coverage report to Jira story ##########"
 echo "-------------------------------------------------------------------------------------------------------"
@@ -57,8 +51,6 @@ curl 	-X POST \
 	-F "file=@code-coverage-report.zip" \
 	https://hackathon-poc.atlassian.net/rest/api/3/issue/$JiraId/attachments
 
-
-rm -r code-coverage-report.zip
 
 kill $(lsof -t -i:8080)
 
