@@ -10,7 +10,7 @@ echo "--------------------------------------------------------------------------
 echo "############## Application starts with the jacoco agent ###########"
 echo "-------------------------------------------------------------------------------------------------------"
 java -javaagent:libraries/org.jacoco.agent-0.8.6-runtime.jar=address=0.0.0.0,port=36320,destfile=exec/jacoco-it.exec,output=tcpserver -jar libraries/application-jar/target/SampleApp-1.0.0-spring-boot.jar&
-sleep 5
+sleep 10
 echo "-------------------------------------------------------------------------------------------------------"
 echo "############# Automation script starts execution ##############"
 echo "-------------------------------------------------------------------------------------------------------"
@@ -47,13 +47,14 @@ echo "--------------------------------------------------------------------------
 echo "######### Uploading code coverage report to Jira story ##########"
 echo "-------------------------------------------------------------------------------------------------------"
 mv code-coverage-report/index.html code-coverage-report/code-coverage-report.html
+zip -r code-coverage-report.zip code-coverage-report
 
 JiraId='PF-1'
 Accesstoken='dmFuZGFuYXN2b25AZ21haWwuY29tOlFvczMwWkdHd2psc05YS2pFQXg2NTgzQw=='
 curl 	-X POST \
 	-H "X-Atlassian-Token:no-check" \
 	-H "Authorization:Basic $Accesstoken" \
-	-F "file=@code-coverage-report/code-coverage-report.html" \
+	-F "file=@code-coverage-report/code-coverage-report.zip" \
 	https://hackathon-poc.atlassian.net/rest/api/3/issue/$JiraId/attachments
 
 
