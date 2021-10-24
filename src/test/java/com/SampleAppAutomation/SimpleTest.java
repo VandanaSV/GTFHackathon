@@ -21,7 +21,7 @@ public class SimpleTest  {
 
     public void test() throws Exception {
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+            options.addArguments("--no-sandbox", "--disable-dev-shm-usage","--headless");
             WebDriver driver= new ChromeDriver(options);
             driver.get("http://localhost:8080/");
             Thread.sleep(5000);
