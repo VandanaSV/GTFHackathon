@@ -1,0 +1,10 @@
+[ {"tunnelName":"LambdaTest tunnel",
+  "buildName":"running Java Selenium Tests",
+  "testName":"Jacoco JUnit Test",
+  "username": "vandanasvon",
+  "access_key":"8KYBKq9QCA4QaTlPwYOx272MLJ5UGgWKgAOrDMuOD9UyzuauWR",
+  "operatingSystem" : "win10",
+  "browserName" : "chrome",
+  "browserVersion" : "62.0",
+  "resolution" : "1024x768"
+}]
