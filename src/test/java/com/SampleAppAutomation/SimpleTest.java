@@ -27,13 +27,13 @@ public class SimpleTest  {
             Thread.sleep(5000);
             assertEquals("Hotel Pink Flamingos", driver.getTitle());
             //Commented
-            /*
+
             //clicks on guests button
             driver.findElement(By.xpath("/html/body/div/a[1]")).click();
             Thread.sleep(2000);
             driver.navigate().back();
 
-            */
+
             //Commented
             Thread.sleep(2000);
             //Clicks on the reservation button
