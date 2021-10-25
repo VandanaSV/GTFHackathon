@@ -4,17 +4,26 @@ Versions supported
 ------------------
 java version 7 and above till java 16 supported
 
-Prerequisites
+Libraries used
 --------------
-• Application jar files(jar and source jar file) should be placed in application-jar folder inside libraries folder
+Jacoco libraries-Jacoco java agent(org.jacoco.agent-0.8.6-runtime.jar) and jacoco cli(jacococli.jar)
 
-• Jacoco libraries-Jacoco java agent(org.jacoco.agent-0.8.6-runtime.jar) should be placed in libraries folder
+How to use 
+--------------
+• Clone the repo to the environment where the tests are run
+
+• Place the application jar files(jar and source jar file)  in target/application-jar folder inside libraries folder
+
+• Place the automation scripts in the root folder
+
 
 How to run
 --------------
-Run the Script.sh file from terminal as follows: ./Script.sh
+Run the CleanUp.sh and Script.sh files from terminal as follows: 
+./CleanUp.sh 
+./Script.sh  
 
 Output
 --------
-Check the code-coverage-report folder to see the code coverage report generated
+Check the code-coverage-report folder to see the code coverage report generated (code-coverage-report.html)
 
